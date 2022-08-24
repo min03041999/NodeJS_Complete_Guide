@@ -3,3 +3,5 @@ npm install nodemon -g
 
 -- Install Express
 npm install --save express
+
+npm install --save body-parser
