@@ -5,3 +5,5 @@ npm install nodemon -g
 npm install --save express
 
 npm install --save body-parser
+
+npm install --save ejs pug express-handlebars
