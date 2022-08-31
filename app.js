@@ -1,9 +1,27 @@
-const http = require("http");
+const path = require("path");
 
-const routers = require("./routes");
+const express = require("express");
+const bodyParser = require("body-parser");
 
-console.log(routers.someText);
+const errorController = require("./controllers/error");
 
-const server = http.createServer(routers.handler);
+const app = express();
 
-server.listen(3000);
+app.set("view engine", "ejs");
+app.set("views", "views");
+
+const adminRoutes = require("./routes/admin");
+const shopRoutes = require("./routes/shop");
+
+// Middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, "public")));
+
+app.use("/admin", adminRoutes);
+app.use(shopRoutes);
+
+// Adding a 404 Error Page
+app.use(errorController.get404);
+
+// Create Server
+app.listen(3000);
